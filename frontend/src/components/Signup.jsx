@@ -5,6 +5,7 @@ import Toast from './Toast';
 import axios from 'axios';
 
 function SignUp() {
+    const [loading ,setLoading]= useState(false);
 const [signupInfo , setsignupInfo] = useState({
     name :"",
     email:"",
@@ -26,6 +27,7 @@ const navigate = useNavigate();
     
 
     const handleSubmit = async (e)=>{
+        setLoading(true);
         e.preventDefault();
         const {name , password, email } = signupInfo;
         if(!name){
@@ -49,7 +51,7 @@ const navigate = useNavigate();
                 toastSuccess(response.data.message)
                 setTimeout(()=>{
                     navigate('/login')
-                },1000)
+                },400)
             } 
             
             
@@ -60,6 +62,8 @@ const navigate = useNavigate();
                 toastError(errMessage,'error')
             }
             
+        } finally{
+            setLoading(false);
         }
     }
 
@@ -116,12 +120,15 @@ const navigate = useNavigate();
                     </div>
 
                     <div>
-                        <button
-                            type="submit"
-                            className="flex w-full justify-center rounded-md animate-gradient bg-gradient-to-r from-cyan-700 to-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gradient-to-l hover:from-cyan-800 hover:to-black transition duration-300 ease-in-out transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        >
-                            Sign Up
-                        </button>
+                    <button
+  type="submit"
+  disabled={loading}
+  className={`flex w-full justify-center rounded-md bg-gradient-to-r from-cyan-700 to-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm transition duration-300 ease-in-out transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+  ${loading ? 'opacity-50 cursor-not-allowed' : 'animate-gradient hover:bg-gradient-to-l hover:from-cyan-800 hover:to-black hover:scale-105'}`}
+>
+  {loading ? 'Loading...' : 'Sign Up'}
+</button>
+
                     </div>
                 </form>
 
