@@ -7,7 +7,6 @@
     function Login() {
         const [toastError, toastSuccess] = Toast();
         const [infoData, setInfoData]= useState();
-        console.log(infoData,'1234567');
         
         const [logoinInfo, setLoginInfo] = useState({
             email: "",
@@ -40,7 +39,6 @@
                         'Content-Type': 'application/json',
                     }
                 })
-                console.log(response);
                 
                 const {email , jwtToken , message , name , success} = response.data
                 localStorage.setItem('token',jwtToken);
