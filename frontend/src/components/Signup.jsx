@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import toast, { ToastBar, Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Toast from './Toast';
 import axios from 'axios';
 
@@ -12,8 +12,7 @@ const [signupInfo , setsignupInfo] = useState({
 })
 
 const [toastError , toastSuccess]= Toast()
-console.log(signupInfo);
-
+const navigate = useNavigate();
 
 
     const handleChange =(e)=>{
@@ -48,8 +47,10 @@ console.log(signupInfo);
             })
             if(response.data.success){
                 toastSuccess(response.data.message)
+                setTimeout(()=>{
+                    navigate('/login')
+                },1000)
             } 
-            console.log(response,'qwer');
             
             
         } catch (error) {
