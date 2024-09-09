@@ -40,7 +40,7 @@ console.log(signupInfo);
         }
 
         try {
-            const url = "http://localhost:8080/auth/signup"
+            const url = "https://jwt-auth-api-murex.vercel.app/auth/signup"
             const response = await axios.post(url,signupInfo,{
                 headers:{
                     'Content-Type': 'application/json',

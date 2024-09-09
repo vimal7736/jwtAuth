@@ -32,7 +32,7 @@
             if (!email || !password) {
                 toastError('Email and Pasword required')
             }
-            const url = "http://localhost:8080/auth/login";
+            const url = "https://jwt-auth-api-murex.vercel.app/auth/login";
 
             try {
                 const response = await axios.post(url, logoinInfo, {
