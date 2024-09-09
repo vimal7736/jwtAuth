@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {  useLocation, useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -6,14 +6,20 @@ const Home = () => {
   const name = localStorage.getItem('loggedInUser'); 
   const email = localStorage.getItem('email'); 
   const navigate = useNavigate();
-
+  
   const handleLogout=()=>{
     localStorage.removeItem('token')
     localStorage.removeItem('loggedInUser')
     navigate('/login')
 
   }
-
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    if(!token || token === ''){
+      navigate('/login')
+    }
+  
+  },[navigate])
   return (
     <div className="min-h-screen flex bg-gray-100">
       <aside className="w-64 bg-gray-800 text-white flex flex-col justify-between p-4">

@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './components/Login';
 import SignUp from './components/Signup';
 import Home from './components/Home';
@@ -7,9 +7,14 @@ import Home from './components/Home';
 
 function App() {
 
-const token = localStorage.getItem('token')
-console.log(token,'token');
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+    console.log(storedToken, 'token');
 
+    
+  }, []);
 
 
 
